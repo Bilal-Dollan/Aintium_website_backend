@@ -16,5 +16,6 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name='index.html')),
     path("api/", include('aintium.urls')),
     path('swagger/', get_swagger_view(title='api')),
-    path('auth/', obtain_auth_token)
+    path('auth/', obtain_auth_token),
+    path('accounts/', include('allauth.urls')),
 ]
