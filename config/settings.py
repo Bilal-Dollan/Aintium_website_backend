@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'aintium',
 
     'rest_framework',
@@ -150,4 +151,4 @@ REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSc
                   'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAdminUser']
                   }
 
-
+SITE_ID = 2
