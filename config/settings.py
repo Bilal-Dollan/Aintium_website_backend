@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'aintium',
 
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'phonenumber_field',
@@ -67,6 +68,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -152,3 +155,7 @@ REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSc
                   }
 
 SITE_ID = 2
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3000",
+]
