@@ -19,7 +19,7 @@ class GetUser(mixins.RetrieveModelMixin, generics.GenericAPIView):
 
 class UserCreate(mixins.CreateModelMixin, generics.GenericAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserCreateSerializer
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)

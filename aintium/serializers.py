@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import *
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserCreateSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         password = validated_data.pop('password')
         instance = self.Meta.model(**validated_data)
@@ -16,6 +16,20 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('email', 'username', 'password', 'phone', 'company', 'current_role', 'birth_date',
                   'date_joined')
         extra_kwarg = {'password': {'write_only': True}}
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'phone', 'company', 'current_role', 'birth_date')
+
+
+class UserEditPasswordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = 'password'
+        extra_kwarg = {'password':{'write_only':True}}
+
 
 
 class AiModelSerializer(serializers.ModelSerializer):
