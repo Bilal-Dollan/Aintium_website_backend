@@ -1,7 +1,6 @@
-from rest_framework import generics, mixins, permissions, authentication
+from rest_framework import generics, mixins, permissions
 from .models import *
 from .serializers import *
-from .mixins import IsStaffEditorPermissionMixin, IsOwnerPermissionMixin
 from .permissions import IsOwner
 
 
@@ -9,12 +8,13 @@ def index(request):
     return None
 
 
-class UserList(mixins.ListModelMixin, generics.GenericAPIView):
+class GetUser(mixins.RetrieveModelMixin, generics.GenericAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    lookup_field = 'pk'
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+    def get(self, request, pk):
+        return self.retrieve(request, pk)
 
 
 class UserCreate(mixins.CreateModelMixin, generics.GenericAPIView):
@@ -56,3 +56,21 @@ class TagList(mixins.ListModelMixin, generics.GenericAPIView):
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+
+class GetAiMode(mixins.RetrieveModelMixin, generics.GenericAPIView):
+    queryset = AiModel.objects.all()
+    serializer_class = AiModelSerializer
+    lookup_field = 'pk'
+    
+    def get(self, request, pk):
+        return self.retrieve(request, pk)
+
+
+class UserEdit(mixins.UpdateModelMixin, generics.GenericAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    lookup_field = 'pk'
+
+    def post(self, request, pk):
+        return self.partial_update(request, pk)
