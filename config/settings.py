@@ -52,14 +52,13 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    # 'dj_rest_auth',
     'phonenumber_field',
     'rest_framework_swagger',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'dj_rest_auth.registration'
+
 ]
 
 MIDDLEWARE = [
