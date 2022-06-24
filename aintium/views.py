@@ -89,19 +89,17 @@ class GetAiModel(mixins.RetrieveModelMixin, generics.GenericAPIView):
         return self.retrieve(request, pk)
 
 
-# TODO
-class UserEdit(mixins.UpdateModelMixin, generics.GenericAPIView):
+class UpdateUser(generics.UpdateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
-    lookup_field = 'pk'
-
-    def post(self, request, pk):
-        return self.update(request, pk)
+    permission_classes = [IsAuthenticated]
+    serializer_class = UpdateUserSerializer
 
 
-# TODO
-class UserEditPassword:
-    pass
+class ResetPassword(generics.UpdateAPIView):
+
+    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = ResetPasswordSerializer
 
 
 class ImageList(mixins.ListModelMixin, generics.GenericAPIView):

@@ -160,6 +160,8 @@ SITE_ID = 2
 
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
+    "http://127.0.0.1:8000",
+
 ]
 
 ACCOUNT_EMAIL_REQUIRED = True
