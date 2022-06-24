@@ -1,20 +1,31 @@
-from rest_framework import generics, mixins, permissions
+from rest_framework import generics, mixins, permissions, viewsets
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import *
 from .serializers import *
-from .permissions import IsOwner
 
 
 def index(request):
     return None
 
 
-class GetUser(mixins.RetrieveModelMixin, generics.GenericAPIView):
+class GetUserPk(mixins.RetrieveModelMixin, generics.GenericAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'pk'
+    permission_classes = [IsAdminUser]
 
     def get(self, request, pk):
         return self.retrieve(request, pk)
+
+
+class GetUser(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return User.objects.filter(pk=user.pk)
 
 
 class UserCreate(mixins.CreateModelMixin, generics.GenericAPIView):
@@ -36,18 +47,20 @@ class AiModelList(mixins.ListModelMixin, generics.GenericAPIView):
 class RequestList(mixins.ListModelMixin, generics.GenericAPIView):
     queryset = Request.objects.all()
     serializer_class = RequestSerializer
+    permission_classes = [IsAdminUser]
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
 
-class BookmarkList(permissions.BasePermission, mixins.ListModelMixin, generics.GenericAPIView):
+class BookmarkList(generics.ListAPIView):
     queryset = Bookmark.objects.all()
     serializer_class = BookmarkSerializer
-    permission_classes = [IsOwner]
+    permission_classes = [IsAuthenticated]
 
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+    def get_queryset(self):
+        user = self.request.user
+        return Bookmark.objects.filter(user_id=user)
 
 
 class TagList(mixins.ListModelMixin, generics.GenericAPIView):
@@ -58,19 +71,50 @@ class TagList(mixins.ListModelMixin, generics.GenericAPIView):
         return self.list(request, *args, **kwargs)
 
 
-class GetAiMode(mixins.RetrieveModelMixin, generics.GenericAPIView):
-    queryset = AiModel.objects.all()
-    serializer_class = AiModelSerializer
+class GetTag(mixins.RetrieveModelMixin, generics.GenericAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
     lookup_field = 'pk'
     
     def get(self, request, pk):
         return self.retrieve(request, pk)
 
 
+class GetAiModel(mixins.RetrieveModelMixin, generics.GenericAPIView):
+    queryset = AiModel.objects.all()
+    serializer_class = AiModelSerializer
+    lookup_field = 'pk'
+
+    def get(self, request, pk):
+        return self.retrieve(request, pk)
+
+
+# TODO
 class UserEdit(mixins.UpdateModelMixin, generics.GenericAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'pk'
 
     def post(self, request, pk):
-        return self.partial_update(request, pk)
+        return self.update(request, pk)
+
+
+# TODO
+class UserEditPassword:
+    pass
+
+
+class ImageList(mixins.ListModelMixin, generics.GenericAPIView):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+class RateList(mixins.ListModelMixin, generics.GenericAPIView):
+    queryset = Rate.objects.all()
+    serializer_class = RateSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

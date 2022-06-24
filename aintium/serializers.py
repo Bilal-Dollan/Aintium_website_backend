@@ -24,12 +24,9 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('email', 'username', 'phone', 'company', 'current_role', 'birth_date')
 
 
+# TODO
 class UserEditPasswordSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = 'password'
-        extra_kwarg = {'password':{'write_only':True}}
-
+    pass
 
 
 class AiModelSerializer(serializers.ModelSerializer):

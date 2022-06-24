@@ -52,12 +52,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
+    # 'dj_rest_auth',
     'phonenumber_field',
     'rest_framework_swagger',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'dj_rest_auth.registration'
 ]
 
 MIDDLEWARE = [
@@ -151,7 +153,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
                   'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.SessionAuthentication',
                                                      'rest_framework.authentication.TokenAuthentication'],
-                  'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAdminUser']
+                  'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny']
                   }
 
 SITE_ID = 2

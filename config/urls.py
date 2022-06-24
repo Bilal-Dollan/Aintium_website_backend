@@ -6,7 +6,7 @@ from rest_framework import routers
 from aintium import views
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework.authtoken.views import obtain_auth_token
-
+# from django.urls import re_path
 
 router = routers.DefaultRouter()
 router.register(r'config', views.index, 'index')
@@ -18,4 +18,6 @@ urlpatterns = [
     path('swagger/', get_swagger_view(title='api')),
     path('auth/', obtain_auth_token),
     path('accounts/', include('allauth.urls')),
+    # path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    # path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls'))
 ]
