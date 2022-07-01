@@ -91,7 +91,7 @@ class ResetPasswordSerializer(serializers.ModelSerializer):
 class AiModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = AiModel
-        fields = ('title', 'description', 'url', 'image_url', 'creation_datetime', 'description_summery', 'api_code')
+        fields = ('id', 'title', 'description', 'url', 'image_url', 'creation_datetime', 'description_summery', 'api_code')
 
 
 class RequestSerializer(serializers.ModelSerializer):
