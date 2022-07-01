@@ -102,14 +102,6 @@ class ResetPassword(generics.UpdateAPIView):
     serializer_class = ResetPasswordSerializer
 
 
-class ImageList(mixins.ListModelMixin, generics.GenericAPIView):
-    queryset = Image.objects.all()
-    serializer_class = ImageSerializer
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
-
 class RateList(mixins.ListModelMixin, generics.GenericAPIView):
     queryset = Rate.objects.all()
     serializer_class = RateSerializer

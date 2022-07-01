@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from aintium.models import User, AiModel, Request, Bookmark, Tag, Image, Rate
+from aintium.models import User, AiModel, Request, Bookmark, Tag, Rate
 
 
 class UserAdministrator(UserAdmin):
@@ -20,7 +20,6 @@ admin.site.register(AiModel)
 admin.site.register(Request)
 admin.site.register(Bookmark)
 admin.site.register(Tag)
-admin.site.register(Image)
 admin.site.register(Rate)
 
 

@@ -1,5 +1,4 @@
 from django.contrib.auth.password_validation import validate_password
-from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from .models import *
 
@@ -92,7 +91,7 @@ class ResetPasswordSerializer(serializers.ModelSerializer):
 class AiModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = AiModel
-        fields = ('title', 'description', 'url', 'creation_datetime', 'description_summery', 'api_code')
+        fields = ('title', 'description', 'url', 'image_url', 'creation_datetime', 'description_summery', 'api_code')
 
 
 class RequestSerializer(serializers.ModelSerializer):
@@ -111,12 +110,6 @@ class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = ('name', 'ai_model_tag')
-
-
-class ImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Image
-        fields = ('ai_model_id', 'img_url')
 
 
 class RateSerializer(serializers.ModelSerializer):

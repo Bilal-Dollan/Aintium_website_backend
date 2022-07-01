@@ -14,7 +14,6 @@ urlpatterns = [
     path('bookmark/list', views.BookmarkList.as_view()),
     path('tag/list', views.TagList.as_view()),
     path('tag/detail/<int:pk>', views.GetTag.as_view()),
-    path('image/list', views.ImageList.as_view()),
     path('rate/list', views.RateList.as_view())
 ]
 

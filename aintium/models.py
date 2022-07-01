@@ -69,6 +69,7 @@ class AiModel(models.Model):
     title               = models.TextField()
     description         = models.TextField()
     url                 = models.URLField()
+    image_url           = models.URLField()
     creation_datetime   = models.DateTimeField(auto_now_add=True)
     description_summery = models.CharField(max_length=100)
     api_code            = models.CharField(max_length=6000)
@@ -91,11 +92,6 @@ class Bookmark(models.Model):
 class Tag(models.Model):
     name         = models.CharField(max_length=255)
     ai_model_tag = models.ManyToManyField(AiModel)
-
-
-class Image(models.Model):
-    ai_model_id     = models.ForeignKey(AiModel, on_delete=models.CASCADE, related_name='images')
-    img_url         = models.URLField()
 
 
 class Rate(models.Model):
